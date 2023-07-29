@@ -51,15 +51,6 @@ const SignInPage = () => {
               </svg>
               <span className='ml-4'>Signin with Google</span>
             </button>
-
-            <div className='text-sm flex justify-between items-center mt-3 w-full'>
-              <p>If you don&apos;t have an account...</p>
-              <Link href='/signup'>
-                <button className='py-2 px-5 ml-3 bg-white border rounded-xl hover:scale-110 duration-300 border-blue-400'>
-                  Sign Up
-                </button>
-              </Link>
-            </div>
           </div>
         </div>
       </div>

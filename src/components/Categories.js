@@ -1,21 +1,19 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
-
+import Image from 'next/image'
 const Categories = ({ products }) => {
   const [showCard, setShowCard] = useState('all')
   const [visibleProducts, setVisibleProducts] = useState(3)
 
   const handleCategory = (category) => {
     setShowCard(category)
-    setVisibleProducts(3) // Reset visible products when changing categories
+    setVisibleProducts(3)
   }
 
   const filteredProducts =
     showCard === 'all'
       ? products
       : products?.filter((product) => product.category === showCard)
-
-  console.log(filteredProducts)
 
   return (
     <section className='pt-16 pb-12 lg:pb-[90px]'>
@@ -156,7 +154,13 @@ const PortfolioCard = ({
     >
       <div className='relative mb-12'>
         <div className='overflow-hidden rounded-lg'>
-          <img src={ImageHref} alt='portfolio' className='w-full' />
+          <Image
+            width={300}
+            height={300}
+            src={ImageHref}
+            alt='portfolio'
+            className='w-[427px] h-[300px] object-cover object-center'
+          />
         </div>
         <div className='relative z-10 px-3 -mt-20 text-center bg-white rounded-lg shadow-lg mx-7 py-9'>
           <span className='block mb-2 text-sm font-semibold text-primary'>

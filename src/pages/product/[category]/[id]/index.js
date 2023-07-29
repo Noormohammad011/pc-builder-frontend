@@ -15,23 +15,40 @@ const ProductDetailPage = ({ products }) => {
 export default ProductDetailPage
 
 export const getStaticPaths = async () => {
-  const res = await fetch('https://pc-builder-json.vercel.app/api/products')
-  const products = await res.json()
-  const paths = products.map((product) => ({
-    params: { category: product.category, id: product.id.toString() },
-  }))
-  return { paths, fallback: false }
+  try {
+    const res = await fetch('https://pc-builder-json.vercel.app/api/products')
+    const products = await res.json()
+
+    const paths = products?.map((product) => ({
+      params: { category: product?.category, id: product?.id.toString() },
+    }))
+
+    return { paths, fallback: false }
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    return { paths: [], fallback: false }
+  }
 }
 
 export const getStaticProps = async ({ params }) => {
-  const res = await fetch(
-    `https://pc-builder-json.vercel.app/products?category=${params.category}&id=${params.id}`
-  )
-  const products = await res.json()
+  try {
+    const res = await fetch(
+      `https://pc-builder-json.vercel.app/products?category=${params.category}&id=${params.id}`
+    )
+    const products = await res.json()
 
-  return {
-    props: {
-      products,
-    },
+    return {
+      props: {
+        products,
+      },
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error)
+    return {
+      props: {
+        products: [],
+      },
+    }
   }
 }
+

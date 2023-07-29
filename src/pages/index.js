@@ -17,12 +17,24 @@ export default function Home({ products }) {
 }
 
 
-export async function getStaticProps() { 
-  const res = await fetch('https://pc-builder-json.vercel.app/products')
-  const products = await res.json()
-  return {
-    props: {
-      products: products,
-    },
+export async function getStaticProps() {
+  try {
+    const res = await fetch('https://pc-builder-json.vercel.app/products')
+    const products = await res.json()
+
+    console.log('products', products)
+
+    return {
+      props: {
+        products: products,
+      },
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error)
+    return {
+      props: {
+        products: [],
+      },
+    }
   }
 }

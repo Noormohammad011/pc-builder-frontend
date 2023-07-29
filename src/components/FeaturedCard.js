@@ -8,8 +8,11 @@ const FeaturedCard = ({ products }) => {
       </h2>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-2 container mx-auto my-6'>
         {products?.slice(0, 6).map((product) => (
-          <Link href={`/product/${product.category}/${product.id}`}>
-            <div key={product.id} className='card w-96 bg-base-100 shadow-xl'>
+          <Link
+            key={product.id}
+            href={`/product/${product.category}/${product.id}`}
+          >
+            <div className='card w-96 bg-base-100 shadow-xl'>
               <figure>
                 <img src={product.image} alt={product.productName} />
               </figure>
@@ -29,8 +32,7 @@ const FeaturedCard = ({ products }) => {
                     Rating: {product.averageRating}
                   </div>
                 </div>
-                <div>
-                </div>
+                <div></div>
               </div>
             </div>
           </Link>
