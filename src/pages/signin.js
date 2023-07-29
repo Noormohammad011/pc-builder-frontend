@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import React from 'react'
-
+import { signIn } from 'next-auth/react'
 const SignInPage = () => {
   return (
     <section className='max-h-screen'>
@@ -9,7 +9,14 @@ const SignInPage = () => {
         <div className='bg-gray-100 p-5 flex rounded-2xl shadow-lg max-w-3xl'>
           <div className='md:w-full px-5'>
             <h2 className='text-2xl font-bold text-[#002D74]'>Signin</h2>
-            <button className='bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300'>
+            <button
+              className='bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300'
+              onClick={() =>
+                signIn('google', {
+                  callbackUrl: 'http://localhost:3000/',
+                })
+              }
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 xmlnsXlink='http://www.w3.org/1999/xlink'
