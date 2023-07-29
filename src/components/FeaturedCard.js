@@ -30,9 +30,6 @@ const FeaturedCard = ({ products }) => {
                   </div>
                 </div>
                 <div>
-                  {/* <Link href={`/product/${encodeURIComponent(product.id)}`}>
-                  <a className='btn btn-primary'>View Details</a>
-                </Link> */}
                 </div>
               </div>
             </div>
