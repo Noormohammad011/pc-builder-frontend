@@ -5,7 +5,20 @@ const Footer = () => {
   return (
     <footer class="bg-slate-50">
       <div class="mx-auto container pb-8 pt-16 lg:pt-24">
-        
+        <div class="text-center">
+          <h2 class="text-3xl font-extrabold text-gray-900 sm:text-5xl">Build Your Custom Product</h2>
+
+          <p class="mx-auto mt-4 max-w-sm text-gray-500">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum maiores ipsum eos temporibus ea nihil.
+          </p>
+
+          <Link
+            href="/pcBuilder"
+            class="mt-8 inline-block rounded-full border border-primary px-12 py-3 text-sm font-medium text-primary hover:bg-primary hover:text-white focus:outline-none focus:ring active:bg-indigo-500"
+          >
+            Get Started
+          </Link>
+        </div>
 
         <div class="mt-16 border-t border-gray-200 pt-8 sm:flex sm:items-center sm:justify-between lg:mt-24">
           <ul class="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">

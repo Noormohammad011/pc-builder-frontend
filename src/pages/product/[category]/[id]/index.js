@@ -1,10 +1,15 @@
+import ProductDetails from '@/components/ProductDetails'
 import { useRouter } from 'next/router'
 import React from 'react'
 
 const ProductDetailPage = ({ products }) => {
   const router = useRouter()
 
-  return <div>{JSON.stringify(products)}</div>
+  return (
+    <div className='mb-20 container mx-auto'>
+      <ProductDetails products={products} category={router.query.category} />
+    </div>
+  )
 }
 
 export default ProductDetailPage

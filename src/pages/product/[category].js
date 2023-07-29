@@ -1,10 +1,16 @@
+import FeaturedCard from '@/components/FeaturedCard'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-const ProductCategory = ({ products }) => {
+const ProductCategory = ({ products, params }) => {
+  const router = useRouter()
   return (
-    <div>
-      <h1 className='text-4xl'>{JSON.stringify(products)}</h1>
+    <div className='pb-20'>
+      <FeaturedCard
+        products={products}
+        title='Products'
+        categoryName={router.query?.category}
+      />
     </div>
   )
 }
@@ -15,7 +21,7 @@ export const getStaticPaths = async () => {
   const res = await fetch('https://pc-builder-json.vercel.app/api/categories')
   const categories = await res.json()
   const paths = categories.map((category) => ({
-    params: { category }, 
+    params: { category },
   }))
 
   return { paths, fallback: false }
