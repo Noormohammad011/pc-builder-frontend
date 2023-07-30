@@ -9,7 +9,7 @@ Pc Builder is a web application that allows users to build their own custom PC. 
 
 ## Backend URL
 
-**Backend URL**: `https://pc-builder-json.vercel.app/api`
+**Backend URL**: `https://pc-builder-json.vercel.app`
 
 ## Frontend URL
 
