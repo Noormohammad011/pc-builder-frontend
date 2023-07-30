@@ -1,4 +1,4 @@
-import { pcbuilder, setUserName } from '@/redux/features/pcBuilderSlice'
+import { pcbuilder } from '@/redux/features/pcBuilderSlice'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -44,7 +44,6 @@ const FeaturedCard = ({ products }) => {
                               product,
                             })
                           )
-                          dispatch(setUserName(session?.user?.name))
                         }}
                         className='badge badge-outline'
                       >

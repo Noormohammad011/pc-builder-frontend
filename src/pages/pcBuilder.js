@@ -1,15 +1,14 @@
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
+import { uuid } from 'uuidv4'
+import { toast } from 'react-toastify'
 
 const pcBuilder = () => {
   const { data: session } = useSession()
-  const {
-    categories = {},
-    userName,
-    pcbuilder,
-  } = useSelector((state) => state.pcbuilder)
+  const { categories = {}, pcbuilder } = useSelector((state) => state.pcbuilder)
 
   const {
     cpu_processor = [],
@@ -75,8 +74,27 @@ const pcBuilder = () => {
           : [],
     }
   )
-  console.log(envet)
 
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/pcBuilder', {
+        id: uuid(),
+        userName: session?.user?.name,
+        envet,
+      })
+
+      toast.success('Congratulations for building your PC!', {
+        autoClose: 3000,
+        toastId: Math.random(),
+      })
+      return response
+    } catch (error) {
+      toast.error('Something went wrong!', {
+        autoClose: 2000,
+        toastId: Math.random(),
+      })
+    }
+  }
   return (
     <div>
       <h1 className='text-center text-2xl'>Welcome, {session?.user?.name}</h1>
@@ -181,9 +199,11 @@ const pcBuilder = () => {
           </table>
           {pcbuilder && (
             <div className='flex justify-center items-center my-4'>
-              <button type='submit' className='btn btn-outline  btn-accent'>
-                PC Builder
-              </button>
+              <form onSubmit={handleSubmit}>
+                <button type='submit' className='btn btn-outline btn-accent'>
+                  PC Builder
+                </button>
+              </form>
             </div>
           )}
         </div>

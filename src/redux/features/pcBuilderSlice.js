@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  userName: null,
   categories: {
     cpu_processor: [],
     motherboard: [],
@@ -36,12 +35,9 @@ const pcbuilderSlice = createSlice({
         }
       }
     },
-    setUserName: (state, action) => {
-      state.userName = action.payload
-    },
   },
 })
 
-export const { pcbuilder, setUserName } = pcbuilderSlice.actions
+export const { pcbuilder } = pcbuilderSlice.actions
 
 export default pcbuilderSlice.reducer
