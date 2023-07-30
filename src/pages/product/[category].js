@@ -19,7 +19,7 @@ export default ProductCategory
 
 export const getStaticPaths = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/categories')
+    const res = await fetch('https://pc-builder-json.vercel.app/api/categories')
     const categories = await res.json()
     const paths = categories?.map((category) => ({
       params: { category },
@@ -34,7 +34,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   try {
     const res = await fetch(
-      `http://localhost:5000/products?category=${params.category}`
+      `https://pc-builder-json.vercel.app/products?category=${params.category}`
     )
     const products = await res.json()
     return {

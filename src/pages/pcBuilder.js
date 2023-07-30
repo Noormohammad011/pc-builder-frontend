@@ -77,11 +77,14 @@ const pcBuilder = ({ userSession, pcBuilded = [] }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/pcBuilder', {
-        id: uuid(),
-        userName: session?.user?.name,
-        pcBuilder: envet,
-      })
+      const response = await axios.post(
+        'https://pc-builder-json.vercel.app/api/pcBuilder',
+        {
+          id: uuid(),
+          userName: session?.user?.name,
+          pcBuilder: envet,
+        }
+      )
 
       toast.success('Congratulations for building your PC!', {
         autoClose: 3000,
@@ -217,7 +220,9 @@ export default pcBuilder
 
 export async function getServerSideProps(context) {
   const userSession = await getSession(context)
-  const { data } = await axios.get('http://localhost:5000/api/pcBuilder')
+  const { data } = await axios.get(
+    'https://pc-builder-json.vercel.app/api/pcBuilder'
+  )
   const pcBuilded = data.filter(
     (item) => item.userName === userSession?.user?.name
   )
