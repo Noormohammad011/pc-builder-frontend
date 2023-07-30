@@ -1,5 +1,6 @@
 import { pcbuilder } from '@/redux/features/pcBuilderSlice'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -15,7 +16,7 @@ const FeaturedCard = ({ products }) => {
       <h2 className='text-3xl font-extrabold text-gray-900 sm:text-5xl'>
         Featured Products
       </h2>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-2 container mx-auto my-6'>
+      <div className='grid grid-cols-1 content-center md:grid-cols-3 gap-4 container mx-auto my-6'>
         {products?.slice(0, 6).map((product) => (
           <Link
             key={product.id}
@@ -23,7 +24,13 @@ const FeaturedCard = ({ products }) => {
           >
             <div className='card w-96 bg-base-100 shadow-xl'>
               <figure>
-                <img src={product.image} alt={product.productName} />
+                <Image
+                  width={300}
+                  height={100}
+                  src={product.image}
+                  alt={product.productName}
+                  className='object-fill h-48 w-96'
+                />
               </figure>
               <div className='card-body'>
                 <h2 className='card-title'>

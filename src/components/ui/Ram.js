@@ -1,20 +1,19 @@
 import Image from 'next/image'
-import React from 'react'
 
 const Ram = ({ products }) => {
   return (
     <div className='mt-16 p-2'>
       <h2 className='text-3xl font-semibold mb-5 '>RAM Details</h2>
-      {products?.map((product,index) => (
+      {products?.map((product, index) => (
         <div key={product.id || index++}>
           <div className='grid grid-cols-1 lg:grid-cols-2 md:gap-8 lg:gap-10'>
             <div className='overflow-hidden'>
               <Image
                 width={500}
                 height={500}
-                className='w-full h-full'
+                className='w-full h-full object-cover object-center'
                 src={product.image}
-                alt=''
+                alt={product.category}
               />
             </div>
             <div className='space-y-5'>

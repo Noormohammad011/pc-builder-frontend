@@ -1,8 +1,6 @@
 import Image from 'next/image'
-import React from 'react'
 
 const Storage = ({ products }) => {
-
   return (
     <div className='mt-16 p-2'>
       <h2 className='text-3xl font-semibold mb-5 '>Storage Device Details</h2>
@@ -13,9 +11,9 @@ const Storage = ({ products }) => {
               <Image
                 width={500}
                 height={500}
-                className='w-full h-full'
+                className='w-full h-full object-cover object-center'
                 src={product.image}
-                alt=''
+                alt={product.category}
               />
             </div>
             <div className='space-y-5'>

@@ -158,7 +158,7 @@ const PortfolioCard = ({
             width={300}
             height={300}
             src={ImageHref}
-            alt='portfolio'
+            alt={title}
             className='w-[427px] h-[300px] object-cover object-center'
           />
         </div>

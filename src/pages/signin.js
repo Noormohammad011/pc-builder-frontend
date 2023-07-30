@@ -9,7 +9,7 @@ const SignInPage = () => {
           <div className='md:w-full px-5'>
             <h2 className='text-2xl font-bold text-[#002D74]'>Signin</h2>
             <button
-              className='bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300'
+              className='bg-white border py-2 w-[200px] rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300'
               onClick={() =>
                 signIn('google', {
                   callbackUrl: 'http://localhost:3000/',
@@ -48,7 +48,7 @@ const SignInPage = () => {
                   d='M48 48L17 24l-4-3 35-10z'
                 />
               </svg>
-              <span className='ml-4'>Signin with Google</span>
+              <span className='ml-4 text-center'>Signin with Google</span>
             </button>
           </div>
         </div>

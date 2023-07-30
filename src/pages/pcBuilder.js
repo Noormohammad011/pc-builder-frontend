@@ -5,10 +5,13 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { uuid } from 'uuidv4'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
+import PcBuilderCard from '@/components/PcBuilderCard'
 
 const pcBuilder = ({ userSession, pcBuilded = [] }) => {
   const { data: session } = useSession()
   const { categories = {}, pcbuilder } = useSelector((state) => state.pcbuilder)
+  const router = useRouter()
 
   const {
     cpu_processor = [],
@@ -75,7 +78,8 @@ const pcBuilder = ({ userSession, pcBuilded = [] }) => {
     }
   )
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       const response = await axios.post(
         'https://pc-builder-json.vercel.app/api/pcBuilder',
@@ -86,10 +90,16 @@ const pcBuilder = ({ userSession, pcBuilded = [] }) => {
         }
       )
 
-      toast.success('Congratulations for building your PC!', {
-        autoClose: 3000,
-        toastId: Math.random(),
-      })
+      setTimeout(() => {
+        toast.success('Congratulations for building your PC!', {
+          autoClose: 3000,
+          toastId: Math.random(),
+        })
+      }, 5000)
+
+      setTimeout(() => {
+        router.reload()
+      }, 8000)
       return response
     } catch (error) {
       toast.error('Something went wrong!', {
@@ -211,6 +221,37 @@ const pcBuilder = ({ userSession, pcBuilded = [] }) => {
             </div>
           )}
         </div>
+      </div>
+      {useSession && (
+        <h1 className='text-center text-2xl uppercase my-5'>
+          {userSession?.user?.name} PC
+        </h1>
+      )}
+
+      <div className='flex justify-center items-center flex-col md:flex-none'>
+        {pcBuilded &&
+          pcBuilded?.map((item, index) => (
+            <div key={item.id}>
+              <h2 className='text-center my-3'>{`PC ${index + 1} - ${
+                item.id
+              }`}</h2>
+              <div className='grid grid-cols-1 md:grid-cols-3 container mx-auto gap-4'>
+                {Object.keys(item.pcBuilder)?.map((category) => (
+                  <div key={category}>
+                    {item.pcBuilder[category].map((product) => (
+                      <PcBuilderCard
+                        key={product.id}
+                        title={product.productName}
+                        image={product.image}
+                        description={category}
+                        id={product.id}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   )

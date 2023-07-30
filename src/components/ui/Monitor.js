@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import React from 'react'
 
 const Monitor = ({ products }) => {
   return (
@@ -12,9 +11,9 @@ const Monitor = ({ products }) => {
               <Image
                 width={500}
                 height={500}
-                className='w-full h-full'
+                className='w-full h-full object-cover object-center'
                 src={product.image}
-                alt=''
+                alt={product.category}
               />
             </div>
             <div className='space-y-5'>
