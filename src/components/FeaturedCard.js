@@ -1,6 +1,15 @@
+import { pcbuilder, setUserName } from '@/redux/features/pcBuilderSlice'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+
 const FeaturedCard = ({ products }) => {
+  const { data: session } = useSession()
+  const router = useRouter()
+  const { category } = router.query
+  const dispatch = useDispatch()
   return (
     <div className='text-center mt-5'>
       <h2 className='text-3xl font-extrabold text-gray-900 sm:text-5xl'>
@@ -24,7 +33,26 @@ const FeaturedCard = ({ products }) => {
                   </div>
                 </h2>
 
-                <div className='card-actions justify-end'>
+                <div className='card-actions justify-start flex items-center flex-wrap'>
+                  {session?.user?.email && (
+                    <Link href={`/pcBuilder`}>
+                      <button
+                        onClick={() => {
+                          dispatch(
+                            pcbuilder({
+                              category,
+                              product,
+                            })
+                          )
+                          dispatch(setUserName(session?.user?.name))
+                        }}
+                        className='badge badge-outline'
+                      >
+                        Add
+                      </button>
+                    </Link>
+                  )}
+
                   <div className='badge badge-outline'>
                     Status: {product.status.toString()}
                   </div>

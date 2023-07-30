@@ -51,4 +51,3 @@ export const getStaticProps = async ({ params }) => {
     }
   }
 }
-
