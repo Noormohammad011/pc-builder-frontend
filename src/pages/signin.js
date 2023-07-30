@@ -12,7 +12,7 @@ const SignInPage = () => {
               className='bg-white border py-2 w-[200px] rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300'
               onClick={() =>
                 signIn('google', {
-                  callbackUrl: 'http://localhost:3000/',
+                  callbackUrl: 'https://pc-builder-frontend-iota.vercel.app/',
                 })
               }
             >
