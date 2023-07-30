@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react'
+import { useSession, getSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useReducer, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -6,7 +6,7 @@ import axios from 'axios'
 import { uuid } from 'uuidv4'
 import { toast } from 'react-toastify'
 
-const pcBuilder = () => {
+const pcBuilder = ({ userSession, pcBuilded = [] }) => {
   const { data: session } = useSession()
   const { categories = {}, pcbuilder } = useSelector((state) => state.pcbuilder)
 
@@ -80,7 +80,7 @@ const pcBuilder = () => {
       const response = await axios.post('http://localhost:5000/api/pcBuilder', {
         id: uuid(),
         userName: session?.user?.name,
-        envet,
+        pcBuilder: envet,
       })
 
       toast.success('Congratulations for building your PC!', {
@@ -95,6 +95,7 @@ const pcBuilder = () => {
       })
     }
   }
+
   return (
     <div>
       <h1 className='text-center text-2xl'>Welcome, {session?.user?.name}</h1>
@@ -213,3 +214,17 @@ const pcBuilder = () => {
 }
 
 export default pcBuilder
+
+export async function getServerSideProps(context) {
+  const userSession = await getSession(context)
+  const { data } = await axios.get('http://localhost:5000/api/pcBuilder')
+  const pcBuilded = data.filter(
+    (item) => item.userName === userSession?.user?.name
+  )
+  return {
+    props: {
+      userSession,
+      pcBuilded,
+    },
+  }
+}
