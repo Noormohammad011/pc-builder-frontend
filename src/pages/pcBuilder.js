@@ -3,12 +3,10 @@ import { useSelector } from 'react-redux'
 
 const pcBuilder = () => {
   const { data: session } = useSession()
-
+  eslint-disable-next-line
   const { categories, userName, pcbuilder } = useSelector(
     (state) => state.pcbuilder
   )
-
-
 
   return (
     <div>
